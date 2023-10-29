@@ -2,7 +2,7 @@ package ru.yandex.praktikum.mytest;
 
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
-import ru.yandex.praktikum.pom.MainPage;
+import ru.yandex.praktikum.main.MainPage;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.WebElement;
