@@ -13,7 +13,7 @@ public class OrderPage {
     private final WebDriver driver;
 
     // Используемые элементы на странице заказа
-    private final By orderHeader = By.xpath("//div[(text()= 'Для кого самокат')]");
+    public final By orderHeader = By.xpath("//div[(text()= 'Для кого самокат')]");
     private final By rentHeader = By.xpath("//div[(text()= 'Про аренду')]");
     private final By inputName = By.xpath("//input[@placeholder ='* Имя']");
     private final By inputSurname = By.xpath("//input[@placeholder ='* Фамилия']");

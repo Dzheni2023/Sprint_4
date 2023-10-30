@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.mytest;
+package ru.yandex.praktikum.test;
 
 import static org.junit.Assert.assertTrue;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -19,8 +19,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 public class OrderTest {
 
     public static WebDriver driver;
-    public static MainPage objMainPage;
-    public OrderPage objOrderPage;
+    public static MainPage mainPage;
+    public OrderPage orderPage;
     private final int indexButton;
     private final String name;
     private final String surname;
@@ -60,7 +60,7 @@ public class OrderTest {
     public static Object[][] getTestData() {
         return new Object[][] {
                 {0, "Оля", "Иванова", "Москва", "Парк Победы", "+79235432642", "29.10.2023", "сутки", "grey", "Комментарий 1"},
-                {1, "Марина", "Очагова", "Москва", "Крылатское", "+76666666666", "03.11.2023", "двое суток", "black", "Комментарий 2"}
+                {0, "Марина", "Очагова", "Москва", "Крылатское", "+76666666666", "03.11.2023", "двое суток", "black", "Комментарий 2"}
         };
     }
 
@@ -82,18 +82,18 @@ public class OrderTest {
     public void testOrder() {
 
         driver.get("https://qa-scooter.praktikum-services.ru/");
-        objMainPage = new MainPage(driver);
-        objMainPage.waitForLoadPage();
-        objMainPage.clickGetCookie();
+        mainPage = new MainPage(driver);
+        mainPage.waitForLoadPage();
+        mainPage.clickGetCookie();
 
-        objMainPage.clickOrder(indexButton);
-        objOrderPage = new OrderPage(driver);
-        objOrderPage.waitForLoadOrderPage();
-        objOrderPage.setDataFieldsAndClickNext(name, surname, address, metro, phone);
-        objOrderPage.waitForLoadRentPage();
-        objOrderPage.setOtherFieldsAndClickOrder(dateOrder, period, color, comment);
+        mainPage.clickOrder(indexButton);
+        orderPage = new OrderPage(driver);
+        orderPage.waitForLoadOrderPage();
+        orderPage.setDataFieldsAndClickNext(name, surname, address, metro, phone);
+        orderPage.waitForLoadRentPage();
+        orderPage.setOtherFieldsAndClickOrder(dateOrder, period, color, comment);
 
-        assertTrue("Отсутствует сообщение об успешном завершении заказа", objMainPage.isElementExist(objOrderPage.orderPlaced));
+        assertTrue("Отсутствует сообщение об успешном завершении заказа", mainPage.isElementExist(orderPage.orderPlaced));
     }
 
     @AfterClass

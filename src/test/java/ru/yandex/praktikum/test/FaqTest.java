@@ -1,4 +1,4 @@
-package ru.yandex.praktikum.mytest;
+package ru.yandex.praktikum.test;
 
 import org.hamcrest.MatcherAssert;
 import org.openqa.selenium.WebDriver;
@@ -18,9 +18,9 @@ import org.openqa.selenium.remote.Augmenter;
 
 @RunWith(Parameterized.class)
 public class FaqTest {
-
+    public static final String SCOOTER_URL = "https://qa-scooter.praktikum-services.ru/";
     public static WebDriver driver;
-    public static MainPage objMainPage; // Главная страница
+    public static MainPage mainPage; // Главная страница
     public static List<WebElement> faqElements; // Список вопросов
     private final int index; // Индекс из списка вопросов
     private final String questionText; // Сам вопрос
@@ -71,13 +71,13 @@ public class FaqTest {
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
         driver = new Augmenter().augment(driver);
-        driver.get("https://qa-scooter.praktikum-services.ru/");
-        objMainPage = new MainPage(driver);
-        objMainPage.waitForLoadFaq();
-        objMainPage.clickGetCookie();
+        driver.get(SCOOTER_URL);
+        mainPage = new MainPage(driver);
+        mainPage.waitForLoadFaq();
+        mainPage.clickGetCookie();
 
         // найдем все вопросы
-        faqElements = objMainPage.getFaqItems();
+        faqElements = mainPage.getFaqItems();
 
         if (isDebugging)
             System.out.println("Количество вопросов: "+faqElements.size());
@@ -88,7 +88,7 @@ public class FaqTest {
 
         WebElement faqElement = faqElements.get(index);
 
-        boolean buttonClickable = objMainPage.isButtonClickable(faqElement);
+        boolean buttonClickable = mainPage.isButtonClickable(faqElement);
         assertTrue("Элемент "+index+" не кликабелен", buttonClickable);
 
         if (!buttonClickable) return;
@@ -96,10 +96,10 @@ public class FaqTest {
         faqElement.click();
 
         String faqQuestion;
-        faqQuestion = objMainPage.getQuestion(faqElement);
+        faqQuestion = mainPage.getQuestion(faqElement);
 
         String faqAnswer;
-        faqAnswer = objMainPage.getAnswer(faqElement);
+        faqAnswer = mainPage.getAnswer(faqElement);
 
         if (isDebugging) {
             System.out.println(faqQuestion);

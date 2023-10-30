@@ -60,8 +60,7 @@ public class MainPage {
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;
         }
-        //return faqElement.findElement(accordionButton).isEnabled();
-    }
+        }
 
     public String getQuestion(WebElement faqElement) {
         return faqElement.findElement(accordionButton).getText();
